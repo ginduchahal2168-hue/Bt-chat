@@ -1,0 +1,16 @@
+{
+  "appId": "com.bluemesh.chat",
+  "appName": "BlueMesh Offline Chat",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "backgroundColor": "#0a0a0a"
+    }
+  }
+}
