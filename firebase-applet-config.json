@@ -1,0 +1,9 @@
+{
+  "apiKey": "AIzaSyDummyKeyForBlueMeshEnvironment",
+  "authDomain": "bluemesh-app.firebaseapp.com",
+  "projectId": "bluemesh-app",
+  "storageBucket": "bluemesh-app.appspot.com",
+  "messagingSenderId": "79891699216",
+  "appId": "1:79891699216:web:8e1df2f1cc5ba480b12",
+  "firestoreDatabaseId": "(default)"
+}

@@ -1,0 +1,151 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private user account profile and settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 80 },
+        "username": { "type": "string", "maxLength": 40, "pattern": "^[a-z0-9_]{3,30}$" },
+        "email": { "type": "string", "maxLength": 120 },
+        "photoURL": { "type": "string", "maxLength": 2000 },
+        "bio": { "type": "string", "maxLength": 200 },
+        "statusMessage": { "type": "string", "maxLength": 100 },
+        "isOnline": { "type": "boolean" },
+        "lastSeen": { "type": "number" },
+        "createdAt": { "type": "number" },
+        "blockedUserIds": { "type": "array" },
+        "privacySettings": { "type": "object" },
+        "notificationSettings": { "type": "object" }
+      },
+      "required": ["uid", "displayName", "username", "createdAt"]
+    },
+    "UserContact": {
+      "title": "User Contact",
+      "description": "A saved contact in a user's address book",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "contactUserId": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 80 },
+        "username": { "type": "string", "maxLength": 40 },
+        "photoURL": { "type": "string", "maxLength": 2000 },
+        "bio": { "type": "string", "maxLength": 200 },
+        "addedAt": { "type": "number" },
+        "isBlocked": { "type": "boolean" }
+      },
+      "required": ["id", "contactUserId", "displayName", "addedAt"]
+    },
+    "Conversation": {
+      "title": "Chat Conversation",
+      "description": "A 1-on-1 or direct conversation between two users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "participantIds": { "type": "array" },
+        "participantDetails": { "type": "object" },
+        "lastMessageText": { "type": "string", "maxLength": 1000 },
+        "lastMessageType": { "type": "string", "maxLength": 30 },
+        "lastMessageSenderId": { "type": "string", "maxLength": 128 },
+        "lastMessageTimestamp": { "type": "number" },
+        "unreadCounts": { "type": "object" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "participantIds", "createdAt", "updatedAt"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "A real-time direct message in a conversation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "conversationId": { "type": "string", "maxLength": 128 },
+        "senderId": { "type": "string", "maxLength": 128 },
+        "senderName": { "type": "string", "maxLength": 80 },
+        "receiverId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["text", "image", "video", "audio", "file", "call", "system"] },
+        "content": { "type": "string", "maxLength": 5000 },
+        "mediaUrl": { "type": "string", "maxLength": 1000000 },
+        "fileName": { "type": "string", "maxLength": 255 },
+        "fileSize": { "type": "number" },
+        "duration": { "type": "number" },
+        "timestamp": { "type": "number" },
+        "status": { "type": "string", "enum": ["sending", "sent", "delivered", "read", "failed"] },
+        "deleted": { "type": "boolean" },
+        "replyTo": { "type": "object" },
+        "reaction": { "type": "string", "maxLength": 10 }
+      },
+      "required": ["id", "conversationId", "senderId", "receiverId", "type", "timestamp", "status"]
+    },
+    "Status": {
+      "title": "User Story Status",
+      "description": "A 24-hour ephemeral status post",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userName": { "type": "string", "maxLength": 80 },
+        "userAvatar": { "type": "string", "maxLength": 2000 },
+        "type": { "type": "string", "enum": ["text", "image", "video"] },
+        "content": { "type": "string", "maxLength": 2000 },
+        "mediaUrl": { "type": "string", "maxLength": 1000000 },
+        "backgroundColor": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "number" },
+        "expiresAt": { "type": "number" },
+        "viewerIds": { "type": "array" }
+      },
+      "required": ["id", "userId", "userName", "type", "createdAt", "expiresAt"]
+    },
+    "CallRecord": {
+      "title": "Call Signal / Record",
+      "description": "Signaling document for real-time WebRTC audio and video calls",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "callerId": { "type": "string", "maxLength": 128 },
+        "callerName": { "type": "string", "maxLength": 80 },
+        "callerAvatar": { "type": "string", "maxLength": 2000 },
+        "receiverId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "enum": ["audio", "video"] },
+        "status": { "type": "string", "enum": ["ringing", "active", "ended", "declined", "missed"] },
+        "offer": { "type": "object" },
+        "answer": { "type": "object" },
+        "callerCandidates": { "type": "array" },
+        "receiverCandidates": { "type": "array" },
+        "createdAt": { "type": "number" },
+        "endedAt": { "type": "number" },
+        "duration": { "type": "number" }
+      },
+      "required": ["id", "callerId", "callerName", "receiverId", "type", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile directory with public search information and settings"
+    },
+    "/users/{userId}/contacts/{contactId}": {
+      "schema": "UserContact",
+      "description": "User's personal saved contacts collection"
+    },
+    "/conversations/{conversationId}": {
+      "schema": "Conversation",
+      "description": "Direct conversation records between two participants"
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages inside a conversation subcollection"
+    },
+    "/statuses/{statusId}": {
+      "schema": "Status",
+      "description": "24-hour temporary story statuses"
+    },
+    "/calls/{callId}": {
+      "schema": "CallRecord",
+      "description": "Signaling for active WebRTC calls and call history"
+    }
+  }
+}

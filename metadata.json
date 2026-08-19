@@ -1,0 +1,6 @@
+{
+  "name": "BlueMesh Offline Chat",
+  "description": "Production-ready 100% offline Bluetooth social chat and P2P file transfer application for direct local device-to-device communication without internet.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
